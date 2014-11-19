@@ -1,0 +1,29 @@
+{
+    "name": "kachit/common",
+    "require": {
+        "php": ">=5.4.0"
+    },
+    "require-dev": {
+        "satooshi/php-coveralls": "dev-master"
+    },
+    "description": "Common classes library",
+    "version": "0.0.1",
+    "keywords": ["library", "factory", "utils"],
+    "support": {
+        "email": "kachit@yandex.ru",
+        "source": "https://github.com/Kachit/Common"
+    },
+    "autoload": {
+        "psr-4": {"Kachit\\Common\\": "src/"}
+    },
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Kachit",
+            "email": "kachit@yandex.ru",
+            "homepage": "https://github.com/kachit/",
+            "role": "Developer"
+        }
+    ]
+}

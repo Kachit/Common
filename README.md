@@ -1,4 +1,4 @@
-Common
+Common classes library
 ======
 
-Common classes for work
+Common classes library for work
