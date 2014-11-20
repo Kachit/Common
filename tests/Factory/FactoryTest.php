@@ -6,7 +6,7 @@
  */
 namespace Kachit\Common\Test\Factory;
 
-use Kachit\Common\Test\Factory\Testable\Factory;
+use Kachit\Common\Testable\Factory;
 
 class FactoryTest extends \PHPUnit_Framework_TestCase {
 

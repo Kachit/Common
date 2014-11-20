@@ -4,7 +4,7 @@
  *
  * @author antoxa <kornilov@realweb.ru>
  */
-namespace Kachit\Common\Test\Factory\Testable;
+namespace Kachit\Common\Testable;
 
 use Kachit\Common\Factory\AbstractFactory;
 
