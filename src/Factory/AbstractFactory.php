@@ -9,24 +9,7 @@ namespace Kachit\Common\Factory;
 abstract class AbstractFactory {
 
     /**
-     * @var array
-     */
-    private $objectsCache = [];
-
-    /**
-     * @var string
-     */
-    private $classPrefix;
-
-    /**
-     * Init
-     */
-    public function __construct() {
-        $this->classPrefix = $this->initClassPrefix();
-    }
-
-    /**
-     * Get object by name
+     * Get object
      *
      * @param string $name
      * @return object
@@ -37,69 +20,54 @@ abstract class AbstractFactory {
     }
 
     /**
-     * Get object with lazy load
+     * Generate class name
      *
      * @param string $name
-     * @return object
+     * @param string $namespace
+     * @return string
      */
-    public function getObjectLazyLoad($name) {
-        $className = $this->generateClassName($name);
-        if (!$this->hasCachedObject($className)) {
-            $object = $this->loadClass($className);
-            $this->setCachedObject($className, $object);
-        }
-        return $this->getCachedObject($className);
+    protected function generateClassName($name, $namespace = null) {
+        $namespace = ($namespace) ? $namespace : $this->getNamespace();
+        return $namespace . '\\' . $this->filterClassName($name) . $this->getClassSuffix();
     }
 
     /**
-     * Get class prefix
+     * Get class suffix
      *
      * @return string
      */
-    public function getClassPrefix() {
-        return $this->classPrefix;
+    protected function getClassSuffix() {
+        return '';
     }
 
     /**
-     * Set ClassPrefix
+     * Filter class name
      *
-     * @param string $classPrefix
-     * @return $this
+     * @param string $name
+     * @return string
      */
-    public function setClassPrefix($classPrefix) {
-        $this->classPrefix = $classPrefix;
-        return $this;
+    protected function filterClassName($name) {
+        return ucfirst(trim($name));
     }
 
     /**
-     * Init class prefix
+     * Get class namespace
      *
      * @return string
      */
-    abstract protected function initClassPrefix();
+    abstract protected function getNamespace();
 
     /**
-     * Load object by class name
+     * Load class
      *
      * @param string $className
      * @return object
-     * @throws \Exception
      */
     protected function loadClass($className) {
         if (!$this->checkClassExists($className)) {
             $this->handleError($this->getErrorMessageClassNotExists($className));
         }
-        return $this->createNewClass($className);
-    }
-
-    /**
-     * Generate class name
-     *
-     * @param string $name
-     * @return string
-     */
-    protected function generateClassName($name) {
-        return $this->getClassPrefix() . ucfirst($name);
+        return $this->createObject($className);
     }
 
     /**
@@ -113,16 +81,6 @@ abstract class AbstractFactory {
     }
 
     /**
-     * Create new class
-     *
-     * @param string $className
-     * @return object
-     */
-    protected function createNewClass($className) {
-        return new $className();
-    }
-
-    /**
      * Handle error
      *
      * @param string $message
@@ -133,49 +91,6 @@ abstract class AbstractFactory {
     }
 
     /**
-     * Has cached object
-     *
-     * @param string $className
-     * @return bool
-     */
-    protected function hasCachedObject($className) {
-        return isset($this->objectsCache[$className]);
-    }
-
-    /**
-     * Set cached object
-     *
-     * @param string $className
-     * @param object $object
-     * @return $this
-     */
-    protected function setCachedObject($className, $object) {
-        $this->objectsCache[$className] = $object;
-        return $this;
-    }
-
-    /**
-     * Delete cached object
-     *
-     * @param string $className
-     * @return $this
-     */
-    protected function deleteCachedObject($className) {
-        unset($this->objectsCache[$className]);
-        return $this;
-    }
-
-    /**
-     * Get cached object
-     *
-     * @param string $className
-     * @return object
-     */
-    protected function getCachedObject($className) {
-        return $this->objectsCache[$className];
-    }
-
-    /**
      * Get error message
      *
      * @param string $className
@@ -183,5 +98,33 @@ abstract class AbstractFactory {
      */
     protected function getErrorMessageClassNotExists($className) {
         return 'Class "' . $className . '" is not exists';
+    }
+
+    /**
+     * Get class reflection
+     *
+     * @param string $className
+     * @return \ReflectionClass
+     */
+    protected function getClassReflection($className) {
+        return new \ReflectionClass($className);
+    }
+    /**
+     * Create object
+     *
+     * @param string $className
+     * @return object
+     */
+    protected function createObject($className) {
+        $reflection = $this->getClassReflection($className);
+        return $reflection->newInstanceArgs($this->getConstructorArguments());
+    }
+    /**
+     * Get new instance constructor arguments
+     *
+     * @return array
+     */
+    protected function getConstructorArguments() {
+        return [];
     }
 } 

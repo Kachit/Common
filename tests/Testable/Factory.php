@@ -11,11 +11,9 @@ use Kachit\Common\Factory\AbstractFactory;
 class Factory extends AbstractFactory {
 
     /**
-     * Init class prefix
-     *
      * @return string
      */
-    protected function initClassPrefix() {
-        // TODO: Implement initClassPrefix() method.
+    protected function getNamespace() {
+        return 'Kachit\Common\Testable\Simple';
     }
 } 
