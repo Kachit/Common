@@ -6,7 +6,7 @@
  */
 namespace Kachit\Common\Test\Factory;
 
-use Kachit\Common\Testable\Factory;
+use Kachit\Common\Test\Testable\Factory;
 
 class FactoryTest extends \PHPUnit_Framework_TestCase {
 
@@ -28,7 +28,7 @@ class FactoryTest extends \PHPUnit_Framework_TestCase {
     public function testGetExistingObjectFoo() {
         $result = $this->testable->getObject('foo');
         $this->assertTrue(is_object($result));
-        $this->assertInstanceOf('Kachit\Common\Testable\Simple\Foo', $result);
+        $this->assertInstanceOf('Kachit\Common\Test\Testable\Simple\Foo', $result);
     }
 
     /**
@@ -37,12 +37,12 @@ class FactoryTest extends \PHPUnit_Framework_TestCase {
     public function testGetExistingObjectBar() {
         $result = $this->testable->getObject('bar');
         $this->assertTrue(is_object($result));
-        $this->assertInstanceOf('Kachit\Common\Testable\Simple\Bar', $result);
+        $this->assertInstanceOf('Kachit\Common\Test\Testable\Simple\Bar', $result);
     }
 
     /**
      * @expectedException \Exception
-     * @expectedExceptionMessage Class "Kachit\Common\Testable\Simple\Boo" is not exists
+     * @expectedExceptionMessage Class "Kachit\Common\Test\Testable\Simple\Boo" is not exists
      */
     public function testGetNotExistingObjectBoo() {
         $this->testable->getObject('boo');

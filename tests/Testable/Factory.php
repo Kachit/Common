@@ -4,7 +4,7 @@
  *
  * @author antoxa <kornilov@realweb.ru>
  */
-namespace Kachit\Common\Testable;
+namespace Kachit\Common\Test\Testable;
 
 use Kachit\Common\Factory\AbstractFactory;
 
@@ -14,6 +14,6 @@ class Factory extends AbstractFactory {
      * @return string
      */
     protected function getNamespace() {
-        return 'Kachit\Common\Testable\Simple';
+        return 'Kachit\Common\Test\Testable\Simple';
     }
 } 

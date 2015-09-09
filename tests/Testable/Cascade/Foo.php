@@ -4,7 +4,7 @@
  *
  * @author Kachit
  */
-namespace Kachit\Common\Testable\Cascade;
+namespace Kachit\Common\Test\Testable\Cascade;
 
 class Foo {
 

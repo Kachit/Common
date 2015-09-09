@@ -4,7 +4,7 @@
  *
  * @author antoxa <kornilov@realweb.ru>
  */
-namespace Kachit\Common\Testable;
+namespace Kachit\Common\Test\Testable;
 
 use Kachit\Common\Factory\AbstractFactoryCascade;
 
@@ -14,6 +14,6 @@ class CascadeFactory extends AbstractFactoryCascade {
      * @return string
      */
     protected function getNamespaces() {
-        return ['Kachit\Common\Testable\Cascade', 'Kachit\Common\Testable\Simple'];
+        return ['Kachit\Common\Test\Testable\Cascade', 'Kachit\Common\Test\Testable\Simple'];
     }
 } 
