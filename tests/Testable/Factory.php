@@ -36,4 +36,23 @@ class Factory extends Common
     {
         return parent::generateClassName($name, $namespace);
     }
+
+    /**
+     * @param string $className
+     * @return bool
+     */
+    public function checkClassExists($className)
+    {
+        return parent::checkClassExists($className);
+    }
+
+    /**
+     * @param string $className
+     * @param array $arguments
+     * @return object
+     */
+    public function createObject($className, array $arguments = [])
+    {
+        return parent::createObject($className, $arguments);
+    }
 } 

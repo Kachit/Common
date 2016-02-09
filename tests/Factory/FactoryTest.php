@@ -69,6 +69,25 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('Bar\\Foo', $result);
     }
 
+    public function testCreateObject()
+    {
+        $result = $this->testable->createObject('Kachit\Common\Test\Testable\Simple\Bar');
+        $this->assertTrue(is_object($result));
+        $this->assertInstanceOf('Kachit\Common\Test\Testable\Simple\Bar', $result);
+    }
+
+    public function testCheckClassExistsValid()
+    {
+        $result = $this->testable->checkClassExists('Kachit\Common\Test\Testable\Simple\Bar');
+        $this->assertTrue($result);
+    }
+
+    public function testCheckClassExistsInValid()
+    {
+        $result = $this->testable->checkClassExists('Kachit\Common\Test\Testable\Simple\Bboo');
+        $this->assertFalse($result);
+    }
+
     /**
      * @expectedException \Exception
      * @expectedExceptionMessage Class "Kachit\Common\Test\Testable\Simple\Boo" is not exists
