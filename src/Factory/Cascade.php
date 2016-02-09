@@ -1,25 +1,27 @@
 <?php
 /**
- * AbstractFactoryCascade
+ * Cascade abstract factory
  *
  * @author Kachit
  * @package Kachit\Common\Factory
  */
 namespace Kachit\Common\Factory;
 
-abstract class AbstractFactoryCascade extends AbstractFactory {
-
+abstract class Cascade extends Common
+{
     /**
-     * Get object
+     * Get object by name
      *
      * @param string $name
+     * @param array $arguments
      * @return object
      */
-    public function getObject($name) {
+    public function getObject($name, array $arguments = [])
+    {
         $object = null;
         foreach ($this->getNamespaces() as $namespace) {
             $className = $this->generateClassName($name, $namespace);
-            $object = $this->loadClass($className);
+            $object = $this->loadClass($className, $arguments);
             if ($object) {
                 break;
             }
@@ -40,13 +42,15 @@ abstract class AbstractFactoryCascade extends AbstractFactory {
      * Load class
      *
      * @param string $className
+     * @param array $arguments
      * @return object
      */
-    protected function loadClass($className) {
+    protected function loadClass($className, array $arguments = [])
+    {
         if (!$this->checkClassExists($className)) {
             return false;
         }
-        return $this->createObject($className);
+        return $this->createObject($className, $arguments);
     }
 
     /**
@@ -55,7 +59,8 @@ abstract class AbstractFactoryCascade extends AbstractFactory {
      * @param string $className
      * @return string
      */
-    protected function getErrorMessageClassNotExists($className) {
+    protected function getErrorMessageClassNotExists($className)
+    {
         return 'Class "' . $className . '" is not exists in this namespaces ' . json_encode($this->getNamespaces());
     }
 
@@ -64,6 +69,7 @@ abstract class AbstractFactoryCascade extends AbstractFactory {
      *
      * @return string
      */
-    protected function getNamespace() {
+    protected function getNamespace()
+    {
     }
 }

@@ -18,23 +18,29 @@ class CascadeFactoryTest extends \PHPUnit_Framework_TestCase {
     /**
      * Init
      */
-    protected function setUp() {
+    protected function setUp()
+    {
         $this->testable = new CascadeFactory();
     }
 
-    /**
-     * Test
-     */
-    public function testGetExistingObjectFoo() {
+    public function testGetExistingObjectFoo()
+    {
         $result = $this->testable->getObject('foo');
         $this->assertTrue(is_object($result));
         $this->assertInstanceOf('Kachit\Common\Test\Testable\Cascade\Foo', $result);
     }
 
-    /**
-     * Test
-     */
-    public function testGetExistingObjectBar() {
+    public function testGetObjectWithArgs()
+    {
+        $result = $this->testable->getObject('fooWithArgs', [1, 2]);
+        $this->assertTrue(is_object($result));
+        $this->assertInstanceOf('Kachit\Common\Test\Testable\Simple\FooWithArgs', $result);
+        $this->assertEquals(1, $result->a);
+        $this->assertEquals(2, $result->b);
+    }
+
+    public function testGetExistingObjectBar()
+    {
         $result = $this->testable->getObject('bar');
         $this->assertTrue(is_object($result));
         $this->assertInstanceOf('Kachit\Common\Test\Testable\Simple\Bar', $result);
@@ -44,7 +50,8 @@ class CascadeFactoryTest extends \PHPUnit_Framework_TestCase {
      * @expectedException \Exception
      * @expectedExceptionMessage Class "boo" is not exists in this namespaces ["Kachit\\Common\\Test\\Testable\\Cascade","Kachit\\Common\\Test\\Testable\\Simple"]
      */
-    public function testGetNotExistingObjectBoo() {
+    public function testGetNotExistingObjectBoo()
+    {
         $this->testable->getObject('boo');
     }
 }

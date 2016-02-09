@@ -6,6 +6,7 @@
  */
 namespace Kachit\Common\Test\Testable\Simple;
 
-class Bar {
+class Bar
+{
 
 }

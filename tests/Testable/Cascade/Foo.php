@@ -6,6 +6,7 @@
  */
 namespace Kachit\Common\Test\Testable\Cascade;
 
-class Foo {
+class Foo
+{
 
 }

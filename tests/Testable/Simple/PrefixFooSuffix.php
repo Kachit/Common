@@ -6,7 +6,7 @@
  */
 namespace Kachit\Common\Test\Testable\Simple;
 
-class Foo
+class PrefixFooSuffix
 {
 
 }
